@@ -45,15 +45,19 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Spacer(),
+            Spacer(),
             AuthTextField(
               controller: _emailController,
               fieldName: "email",
+              //hintText: "Email",
+              //icon: Icons.people_alt,
             ),
             const SizedBox(height: AppStyles.defaultSpacing),
             AuthTextField(
               controller: _passwordController,
               fieldName: "password",
+              //hintText: "Password",
+              //icon: Icons.lock,
               obscureText: _showPassword,
               onSuffixIconPressed: _togglePasswordVisible,
             ),
@@ -67,7 +71,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
               onPressed: () {},
               text: "구글",
             ),
-            const Spacer(),
+            Spacer(),
             AuthButton(
               onPressed: () => context.push("/signUp"),
               text: "새 계정 만들기",

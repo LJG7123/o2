@@ -63,7 +63,7 @@ class ProductCard extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          product.locationName,
+                          product.location,
                           style: Theme.of(context).textTheme.bodySmall?.copyWith(
                                 color: AppColors.textSecondary,
                                 fontSize: 13,

@@ -11,7 +11,6 @@ class AuthTextField extends StatelessWidget {
     this.obscureText,
     this.onSuffixIconPressed,
     this.focusNode,
-    this.errorText,
   });
 
   final TextEditingController controller;
@@ -20,7 +19,6 @@ class AuthTextField extends StatelessWidget {
   final TextInputType? keyboardType;
   final bool? obscureText;
   final FocusNode? focusNode;
-  final String? errorText;
 
   @override
   Widget build(BuildContext context) {
@@ -52,15 +50,14 @@ class AuthTextField extends StatelessWidget {
       decoration: InputDecoration(
         border: const OutlineInputBorder(),
         hintText: hintText,
-        errorText: errorText,
         prefixIcon: Icon(icon),
         suffixIcon: onSuffixIconPressed == null
             ? null
             : IconButton(
                 onPressed: onSuffixIconPressed,
                 icon: obscureText!
-                    ? const Icon(Icons.visibility_off)
-                    : const Icon(Icons.visibility),
+                    ? Icon(Icons.visibility_off)
+                    : Icon(Icons.visibility),
               ),
       ),
       focusNode: focusNode,

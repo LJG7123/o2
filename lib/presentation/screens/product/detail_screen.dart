@@ -97,7 +97,7 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
                                       ),
                                 ),
                                 Text(
-                                  product.locationName,
+                                  product.location,
                                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
                                         color: AppColors.textSecondary,
                                       ),
@@ -212,7 +212,7 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
                                 child: Row(
                                   children: [
                                     Text(
-                                      product.locationName,
+                                      product.location,
                                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                                             color: AppColors.textSecondary,
                                           ),
@@ -238,7 +238,7 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
                               child: NaverMap(
                                 options: NaverMapViewOptions(
                                   initialCameraPosition: NCameraPosition(
-                                    target: NLatLng(product.latitude, product.longitude),
+                                    target: NLatLng(37.5666102, 126.9783881),
                                     zoom: 15,
                                   ),
                                 ),
@@ -259,7 +259,7 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
                 bottom: 0,
                 child: Container(
                   padding: const EdgeInsets.all(16),
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     color: Colors.white,
                     border: Border(
                       top: BorderSide(color: AppColors.divider),

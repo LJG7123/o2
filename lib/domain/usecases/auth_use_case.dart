@@ -1,5 +1,4 @@
-import 'package:o2/domain/entities/user_entity.dart';
-
+import '../../data/models/user_model.dart';
 import '../repositories/auth_repository.dart';
 
 class AuthUseCase {
@@ -8,12 +7,12 @@ class AuthUseCase {
   AuthUseCase(this._authRepository);
 
   // 회원가입
-  Future<UserEntity?> signUp(UserEntity userEntity, String password) async {
-    return await _authRepository.signUp(userEntity, password);
+  Future<UserModel?> signUp(String email, String password) async {
+    return await _authRepository.signUp(email, password);
   }
 
   // 로그인
-  Future<UserEntity?> signIn(String email, String password) async {
+  Future<UserModel?> signIn(String email, String password) async {
     return await _authRepository.signIn(email, password);
   }
 
@@ -22,7 +21,8 @@ class AuthUseCase {
     return await _authRepository.signOut();
   }
 
-  Future<bool> validEmail(String email) async {
-    return await _authRepository.validEmail(email);
+  // 현재 로그인한 사용자 정보 가져오기
+  UserModel? getCurrentUser() {
+    return _authRepository.getCurrentUser();
   }
 }

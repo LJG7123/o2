@@ -1,8 +1,7 @@
-import 'package:o2/domain/entities/user_entity.dart';
-
 import '../../domain/repositories/auth_repository.dart';
 import '../datasources/auth_data_source.dart';
 import '../datasources/user_data_source.dart';
+import '../models/user_model.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
   final AuthDataSource _authDataSource;
@@ -11,29 +10,22 @@ class AuthRepositoryImpl implements AuthRepository {
   AuthRepositoryImpl(this._authDataSource, this._userDataSource);
 
   @override
-  Future<UserEntity?> signUp(UserEntity userEntity, String password) async {
-    final user = await _authDataSource.signUp(userEntity.email, password);
-
+  Future<UserModel?> signUp(String email, String password) async {
+    final user = await _authDataSource.signUp(email, password);
     if (user != null) {
-      await _userDataSource.saveUser(userEntity.toModel(user.uid));
-      final userData = await _userDataSource.getUser(user.uid);
-
-      if (userData != null) {
-        return userData.toEntity();
-      }
+      final userModel = UserModel.fromFirebaseUser(user);
+      await _userDataSource.saveUser(userModel);
+      return userModel;
     }
-
     return null;
   }
 
   @override
-  Future<UserEntity?> signIn(String email, String password) async {
+  Future<UserModel?> signIn(String email, String password) async {
     final user = await _authDataSource.signIn(email, password);
     if (user != null) {
-      final userData = await _userDataSource.getUser(user.uid);
-      if (userData != null) {
-        return userData.toEntity();
-      }
+      final userModel = UserModel.fromFirebaseUser(user);
+      return userModel;
     }
     return null;
   }
@@ -44,7 +36,11 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<bool> validEmail(String email) async {
-    return await _userDataSource.validEmail(email);
+  UserModel? getCurrentUser() {
+    final user = _authDataSource.getCurrentUser();
+    if (user != null) {
+      return UserModel.fromFirebaseUser(user);
+    }
+    return null;
   }
 }

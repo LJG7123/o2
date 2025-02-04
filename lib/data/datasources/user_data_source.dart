@@ -18,14 +18,4 @@ class UserDataSource {
     }
     return null;
   }
-
-  Future<bool> validEmail(String email) async {
-    final count = await _firestore
-        .collection("users")
-        .where("email", isEqualTo: email)
-        .count()
-        .get();
-
-    return count.count == 0;
-  }
 }

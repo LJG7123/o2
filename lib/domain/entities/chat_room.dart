@@ -1,5 +1,3 @@
-import 'package:o2/domain/entities/chat_message.dart';
-
 class ChatRoom {
   final String id;
   final String buyer;
@@ -7,7 +5,6 @@ class ChatRoom {
   final int unreadMessageCount;
   final String? lastMessage;
   final DateTime? lastMessageTime;
-  final ChatMessageType? lastMessageType;
   final String? lastMessageSender;
 
   ChatRoom({
@@ -17,7 +14,6 @@ class ChatRoom {
     required this.unreadMessageCount,
     this.lastMessage,
     this.lastMessageTime,
-    this.lastMessageType,
     this.lastMessageSender,
   });
 }

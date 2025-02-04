@@ -5,9 +5,7 @@ class Product {
   final String title;
   final String description;
   final int price;
-  final String locationName; // 주소명
-  final double latitude; // 위도
-  final double longitude; // 경도
+  final String location;
   final String category;
   final List<String> images;
   final int viewCount;
@@ -23,9 +21,7 @@ class Product {
     required this.title,
     required this.description,
     required this.price,
-    required this.locationName,
-    required this.latitude,
-    required this.longitude,
+    required this.location,
     required this.category,
     required this.images,
     required this.viewCount,
@@ -43,9 +39,7 @@ class Product {
       title: model.title,
       description: model.description,
       price: model.price,
-      locationName: model.locationName,
-      latitude: model.location.latitude,
-      longitude: model.location.longitude,
+      location: model.location,
       category: model.category,
       images: model.images,
       viewCount: model.viewCount,

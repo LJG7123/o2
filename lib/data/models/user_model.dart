@@ -1,37 +1,29 @@
-import 'package:o2/domain/entities/user_entity.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class UserModel {
   final String id;
   final String email;
-  final String name;
 
-  UserModel({
-    required this.id,
-    required this.email,
-    required this.name,
-  });
+  UserModel({required this.id, required this.email});
+
+  factory UserModel.fromFirebaseUser(User user) {
+    return UserModel(
+      id: user.uid,
+      email: user.email ?? "",
+    );
+  }
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
-      id: json["id"],
-      email: json["email"],
-      name: json["name"],
+      id: json['id'],
+      email: json['email'],
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      "id": id,
-      "email": email,
-      "name": name,
+      'id': id,
+      'email': email,
     };
-  }
-
-  UserEntity toEntity() {
-    return UserEntity(
-      id: id,
-      email: email,
-      name: name,
-    );
   }
 }

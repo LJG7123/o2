@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:o2/domain/entities/chat_message.dart';
 import 'package:o2/domain/entities/chat_room.dart';
 
 class ChatRoomModel {
@@ -9,7 +8,6 @@ class ChatRoomModel {
   final int unreadMessageCount;
   final String lastMessage;
   final Timestamp lastMessageTime;
-  final String lastMessageType;
   final String lastMessageSender;
 
   ChatRoomModel({
@@ -19,7 +17,6 @@ class ChatRoomModel {
     required this.unreadMessageCount,
     required this.lastMessage,
     required this.lastMessageTime,
-    required this.lastMessageType,
     required this.lastMessageSender,
   });
 
@@ -31,7 +28,6 @@ class ChatRoomModel {
       unreadMessageCount: json['unreadMessageCount'],
       lastMessage: json['lastMessage'],
       lastMessageTime: json['lastMessageTime'],
-      lastMessageType: json['lastMessageType'],
       lastMessageSender: json['lastMessageSender'],
     );
   }
@@ -44,7 +40,6 @@ class ChatRoomModel {
       unreadMessageCount: unreadMessageCount,
       lastMessage: lastMessage,
       lastMessageTime: lastMessageTime.toDate(),
-      lastMessageType: ChatMessageType.getByCode(lastMessageType),
       lastMessageSender: lastMessageSender,
     );
   }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:o2/domain/entities/chat_room.dart';
 import 'package:o2/presentation/providers/chat_provider.dart';
 import 'package:o2/presentation/screens/chat/widgets/chat_room_list.dart';
@@ -19,7 +18,7 @@ class _ChatListScreenState extends ConsumerState<ChatListScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final userId = 'a'; // TODO - 실제 유저 아이디를 가져오도록 변경
+    final userId = 'a';
     final chatRooms = ref
         .watch(chatRoomProvider)
         .where(
@@ -27,22 +26,16 @@ class _ChatListScreenState extends ConsumerState<ChatListScreen> {
         .toList();
 
     return Scaffold(
-      appBar: AppBar(title: const Text('채팅')),
+      appBar: AppBar(title: Text('채팅')),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12),
+            padding: EdgeInsets.symmetric(horizontal: 12),
             child: _buildFilterChips(),
           ),
           Expanded(
               child: ChatRoomList(chatRoomList: chatRooms, userId: userId)),
-          // 새 채팅방 테스트용 버튼
-          OutlinedButton(onPressed: () {
-            context.push('/chats/chat_room', extra: {
-              'otherUserId': 'd',
-            });
-          }, child: const Text('new message')),
         ],
       ),
     );
