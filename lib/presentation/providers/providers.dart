@@ -9,6 +9,7 @@ import 'package:o2/domain/repositories/chat_repository.dart';
 import 'package:o2/domain/repositories/image_repository.dart';
 import 'package:o2/domain/repositories/user_repository.dart';
 import 'package:o2/domain/usecases/chat_use_case.dart';
+import 'package:o2/domain/usecases/map_use_case.dart';
 import 'package:o2/domain/usecases/user_use_case.dart';
 
 final chatRemoteDataSourceProvider =
@@ -48,5 +49,18 @@ final sendChatImageUseCaseProvider = Provider<SendChatImageUseCase>((ref) =>
 final markChatAsReadUseCaseProvider = Provider<MarkChatAsReadUseCase>(
     (ref) => MarkChatAsReadUseCase(ref.read(chatRepositoryProvider)));
 
+final deleteChatMessageUseCaseProvider = Provider<DeleteChatMessageUseCase>(
+    (ref) => DeleteChatMessageUseCase(ref.read(chatRepositoryProvider)));
+
 final getUserDataUseCaseProvider = Provider<GetUserDataUseCase>(
     (ref) => GetUserDataUseCase(ref.read(userRepositoryProvider)));
+
+final otherUserProvider = Provider((ref) {
+    final getUserDataUseCase = ref.read(getUserDataUseCaseProvider);
+    return (String otherUserId) => getUserDataUseCase(otherUserId);
+});
+
+final getLatLngProvider = Provider((ref) {
+    final mapUseCase = ref.read(mapUseCaseProvider);
+    return (String placeId) => mapUseCase.getLatLng(placeId);
+});
